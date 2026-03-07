@@ -4,6 +4,12 @@ A Glamorous Toolkit version manager built inside GT itself. Browse available rel
 
 ## Quick Start
 
+```st
+Metacello new
+	repository: 'github://dweinstein/gt-version-manager/src';
+	baseline: 'GtVersionManager';
+```
+
 ```smalltalk
 GtVersionManager default inspect
 ```
