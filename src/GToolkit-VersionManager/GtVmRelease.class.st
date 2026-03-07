@@ -42,13 +42,35 @@ GtVmRelease >> gtActionBrowseOnGitHubFor: anAction [
 ]
 
 { #category : 'views' }
+GtVmRelease >> gtActionInstallFor: anAction [
+	<gtAction>
+	self isCurrentVersion ifTrue: [ ^ anAction empty ].
+	^ anAction button
+		tooltip: 'Download and install this version';
+		priority: 5;
+		icon: BrGlamorousVectorIcons fromcloud;
+		action: [ :aButton |
+			aButton disable.
+			[ | installation |
+				installation := GtVersionManager default installRelease: self.
+				aButton enqueueTask: (BlTaskAction new action: [
+					aButton enable.
+					aButton phlow spawnObject: installation ]) ]
+			fork ]
+]
+
+{ #category : 'views' }
 GtVmRelease >> gtAssetsFor: aView [
 	<gtView>
-	^ aView forward
+	^ aView columnedList
 		title: 'Assets';
 		priority: 10;
-		object: [ self assets ];
-		view: #gtItemsFor:
+		items: [ self assets platformBuilds ];
+		column: 'Platform' text: #platform width: 100;
+		column: 'Architecture' text: #architecture width: 100;
+		column: 'Size' text: #humanReadableSize width: 80;
+		column: 'Downloads' text: #downloadCount width: 80;
+		column: 'Name' text: #name
 ]
 
 { #category : 'views' }

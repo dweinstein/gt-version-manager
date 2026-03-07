@@ -81,6 +81,7 @@ GtVersionManager >> downloadRelease: aGtVmRelease [
 	targetDir := self installDirectory / aGtVmRelease tagName.
 	targetDir ensureCreateDirectory.
 	zipFile := targetDir / asset name.
+	zipFile exists ifTrue: [ ^ zipFile ].
 	ZnClient new
 		url: asset downloadUrl;
 		downloadTo: zipFile.
