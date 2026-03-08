@@ -189,7 +189,7 @@ GtVersionManager >> gtComparisonFor: aView [
 				ifFalse: [ 'no' ] ] width: 90;
 		column: 'Installed' text: [ :row |
 			(row at: #installed) 
-				ifTrue: [ 'yes' asRopedText foreground: (Color r: 0.0 g: 0.6 b: 0.0) bold ]
+				ifTrue: [ 'yes' asRopedText foreground: (Color r: 0.0 g: 0.6 b: 0.0); bold ]
 				ifFalse: [ 'no' ] ] width: 70;
 		column: 'Published' text: [ :row | row at: #published ] width: 150;
 		send: [ :row |
